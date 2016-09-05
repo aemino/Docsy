@@ -115,6 +115,14 @@ client.on("message", (message) => {
 
 });
 
+client.on("ready", () => {
+  console.log("Connected!");
+});
+
+client.on("disconnect", () => {
+  console.log("Disconnected.");
+});
+
 
 client.connect(config.token);
 
