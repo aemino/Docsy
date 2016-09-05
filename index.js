@@ -110,6 +110,11 @@ client.on("message", (message) => {
 
       return commands.remove(message, channelID);
     }
+
+    if (command === "eval") {
+
+      return commands.eval(message);
+    }
   }
 
   let channel = data.channels[message.channel.id];
