@@ -4,21 +4,23 @@
 const config = require('./config');
 const data   = require('./data');
 
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
 
 const Discord = require('discord.js');
 
 const Docs = require('./lib/Docs');
+const Lookup = require('./lib/Lookup');
 const Commands = require('./lib/Commands');
 const GithubServer = require('./lib/GithubServer');
 
 
 const client = new Discord.Client();
 
-const docs = new Docs(data);
+const docs     = new Docs(data);
 const commands = new Commands(data, docs);
-const server = new GithubServer(docs);
+const server   = new GithubServer(docs);
+const lookup   = new Lookup(data, docs);
 
 
 client.on("message", (message) => {
@@ -37,6 +39,10 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.success} Already initialized.`);
       }
 
+      if (!args[0] || !args[1]) {
+        return message.channel.sendMessage(`${config.emojis.warn} Invalid arguments.`);
+      }
+
       // parse owner/repo#branch
 
       const gitsrc  = args[0].split('#');
@@ -50,7 +56,12 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Invalid arguments.`);
       }
 
-      return commands.init(message, owner, repo, branch, path);
+      message.channel.sendMessage(`${config.emojis.cog} Working...`).then(() => {
+        commands.init(message, owner, repo, branch, path);
+        save();
+      });
+
+      return;
     }
 
     if (command === "activate") {
@@ -65,7 +76,8 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Already inactive.`);
       }
 
-      return commands.setActive(true, message, channelID);
+      commands.setActive(true, message, channelID);
+      return save();
     }
 
     if (command === "deactivate") {
@@ -80,7 +92,8 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Already active.`);
       }
 
-      return commands.setActive(false, message, channelID);
+      commands.setActive(false, message, channelID);
+      return save();
     }
 
     if (command === "cease") {
@@ -91,7 +104,8 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Not yet initialized.`);
       }
 
-      return commands.cease(message, channelID);
+      commands.cease(message, channelID);
+      return save();
     }
 
     if (command === "remove") {
@@ -104,15 +118,17 @@ client.on("message", (message) => {
 
       return commands.remove(message, channelID);
     }
+
+    if (command === "eval") {
+
+      const evaluate = args.join(" ");
+
+      return commands.eval(message, evaluate);
+    }
   }
 
-  let channel = data.channels[message.channel.id];
-  if (!channel || !channel.repo) return;
 
-  let repo = data.repos[channel.repo];
-  if (!repo || !repo.active) return;
-
-
+  lookup.respond(message, params);
 });
 
 client.on("ready", () => {
@@ -124,7 +140,8 @@ client.on("disconnect", () => {
 });
 
 
-client.login(config.token);
+client.login(config.client.token);
+console.log("Logging in...");
 
 function save() {
   fs.writeFileSync('./data.json', JSON.stringify(data));

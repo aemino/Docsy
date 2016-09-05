@@ -1,0 +1,34 @@
+
+"use strict";
+
+const pkg = require('package');
+const version = pkg.version;
+
+
+const config = {
+
+  client: {
+    token: "token"
+  },
+
+  github: {
+    secret: "secret",
+    headers: {
+      "User-Agent": `Programmix/Docsy ${version}`
+    }
+  },
+
+  url: "url",
+  port: 7777,
+
+  admin: "80801429802983424",
+
+  emojis: {
+    success: "✅",
+    warn: "⚠",
+    working: "⚙"
+  }
+
+};
+
+module.exports = config;
