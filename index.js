@@ -6,7 +6,6 @@ const data   = require('./data');
 
 const fs   = require('fs');
 const path = require('path');
-const zlib = require('zlib');
 
 const Discord = require('discord.js');
 
@@ -145,28 +144,8 @@ client.on("disconnect", () => {
 client.login(config.client.token);
 console.log("Logging in...");
 
-function save() {
-  let deepClone = (obj) => {
-    for (let key in obj) {
-      let value = obj[key];
-
-      if (typeof value === "object")
-        obj[key] = deepClone(value);
-      else
-        obj[key] = value;
-    }
-
-    return obj;
-  };
-
-  let saveData = JSON.parse(JSON.stringify(data)); // hacky deep clone
-
-  for (let docs in saveData.docs) {
-    let content = zlib.deflateSync(JSON.stringify(saveData.docs[docs]));
-    saveData.docs[docs] = content.toString('utf-8');
-  }
-
-  fs.writeFileSync('./data.json', JSON.stringify(saveData));
+function save() {  
+  fs.writeFileSync('./data.json', JSON.stringify(data));
 }
 
 setInterval(save, (60 * 1000)); // autosave
