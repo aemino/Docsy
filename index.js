@@ -39,6 +39,10 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.success} Already initialized.`);
       }
 
+      if (!args[0] || !args[1]) {
+        return message.channel.sendMessage(`${config.emojis.warn} Invalid arguments.`);
+      }
+
       // parse owner/repo#branch
 
       const gitsrc  = args[0].split('#');
@@ -122,7 +126,7 @@ client.on("message", (message) => {
       return commands.eval(message, evaluate);
     }
   }
-  
+
 
   lookup.respond(message, params);
 });
