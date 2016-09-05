@@ -4,7 +4,7 @@
 const config = {
 
   client: {
-    token: "MjIyMTM2ODg0Mzg0NDk3NjY2.Cq5Izw.sqmNbdlktGxpgEMKNB3NTLTbExQ"
+    token: "MjIyMTM2ODg0Mzg0NDk3NjY2.Cq5biw.Mcf4ohmfwfUXRreQ2AZ5MGcCVcU"
   },
 
   github: {
