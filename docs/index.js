@@ -88,16 +88,16 @@ class Documentation {
       parent.add(item);
     }
     if (unknowns.size > 0) {
-      Array.from(unknowns.keys()).map(
+      /*Array.from(unknowns.keys()).map(
         k => console.log(`Unknown documentation kind ${k} - \n${JSON.stringify(unknowns.get(k))}\n`
-      ));
+      ));*/
     }
   }
 
   serialize() {
     const meta = {
       version: GEN_VERSION,
-      date: Date.now(),
+      date: Date.now()
     };
 
     const serialized = {
