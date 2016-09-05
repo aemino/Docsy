@@ -11,15 +11,17 @@ const zlib = require('zlib');
 const Discord = require('discord.js');
 
 const Docs = require('./lib/Docs');
+const Lookup = require('./lib/Lookup');
 const Commands = require('./lib/Commands');
 const GithubServer = require('./lib/GithubServer');
 
 
 const client = new Discord.Client();
 
-const docs = new Docs(data);
+const docs     = new Docs(data);
 const commands = new Commands(data, docs);
-const server = new GithubServer(docs);
+const server   = new GithubServer(docs);
+const lookup   = new Lookup(docs);
 
 
 client.on("message", (message) => {
@@ -128,7 +130,7 @@ client.on("message", (message) => {
   let repo = data.repos[channel.repo];
   if (!repo || !repo.active) return;
 
-  
+  lookup.respond(message, params);
 });
 
 client.on("ready", () => {
@@ -157,7 +159,7 @@ function save() {
     return obj;
   };
 
-  let saveData = deepClone(data, {});
+  let saveData = JSON.parse(JSON.stringify(data)); // hacky deep clone
 
   for (let docs in saveData.docs) {
     let content = zlib.deflateSync(JSON.stringify(saveData.docs[docs]));
