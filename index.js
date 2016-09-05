@@ -51,10 +51,12 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Invalid arguments.`);
       }
 
-      message.channel.sendMessage(`${config.emojis.cog} Working...`);
+      message.channel.sendMessage(`${config.emojis.cog} Working...`).then(() => {
+        commands.init(message, owner, repo, branch, path);
+        save();
+      });
 
-      commands.init(message, owner, repo, branch, path);
-      return save();
+      return;
     }
 
     if (command === "activate") {
@@ -158,8 +160,8 @@ function save() {
   let saveData = deepClone(data, {});
 
   for (let docs in saveData.docs) {
-    let content = zlib.deflateSync(saveData.docs[docs]);
-    saveData.docs[docs] = JSON.parse(content);
+    let content = zlib.deflateSync(JSON.stringify(saveData.docs[docs]));
+    saveData.docs[docs] = content;
   }
 
   fs.writeFileSync('./data.json', JSON.stringify(data));
