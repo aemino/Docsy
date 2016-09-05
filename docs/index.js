@@ -82,7 +82,7 @@ class Documentation {
       }
       const parent = this.findParent(member);
       if (!parent) {
-        console.log(new Error(`${member.name || member.directData.name} has no accessible parent`));
+        //console.log(new Error(`${member.name || member.directData.name} has no accessible parent`));
         continue;
       }
       parent.add(item);
