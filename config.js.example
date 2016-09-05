@@ -1,8 +1,8 @@
 
 "use strict";
 
-const package = require('package');
-const version = package.version;
+const pkg = require('package');
+const version = pkg.version;
 
 
 const config = {
