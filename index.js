@@ -64,38 +64,6 @@ client.on("message", (message) => {
       return;
     }
 
-    if (command === "activate") {
-
-      const channelID = message.channel.id;
-
-      if (!data.channels.hasOwnProperty(channelID)) {
-        return message.channel.sendMessage(`${config.emojis.warn} Not yet initialized.`);
-      }
-
-      if (data.repos[data.channels[channelID].repo].active) {
-        return message.channel.sendMessage(`${config.emojis.warn} Already inactive.`);
-      }
-
-      commands.setActive(true, message, channelID);
-      return save();
-    }
-
-    if (command === "deactivate") {
-
-      const channelID = message.channel.id;
-
-      if (!data.channels.hasOwnProperty(channelID)) {
-        return message.channel.sendMessage(`${config.emojis.warn} Not yet initialized.`);
-      }
-
-      if (!data.repos[data.channels[channelID].repo].active) {
-        return message.channel.sendMessage(`${config.emojis.warn} Already active.`);
-      }
-
-      commands.setActive(false, message, channelID);
-      return save();
-    }
-
     if (command === "cease") {
 
       const channelID = message.channel.id;
