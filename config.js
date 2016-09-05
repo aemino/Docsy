@@ -9,7 +9,7 @@ const config = {
 
   github: {
     secret: "docsy_is_awfully_cute"
-  }
+  },
 
   url: "158.69.243.217",
   port: 7777,
