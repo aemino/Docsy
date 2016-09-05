@@ -164,7 +164,7 @@ function save() {
     saveData.docs[docs] = content.toString('utf-8');
   }
 
-  fs.writeFileSync('./data.json', JSON.stringify(data));
+  fs.writeFileSync('./data.json', JSON.stringify(saveData));
 }
 
 setInterval(save, (60 * 1000)); // autosave
