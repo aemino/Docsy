@@ -19,7 +19,7 @@ const client = new Discord.Client();
 
 const docs     = new Docs(data);
 const commands = new Commands(data, docs);
-const server   = new GithubServer(docs);
+const server   = new GithubServer(data, docs);
 const lookup   = new Lookup(data, docs);
 
 
