@@ -161,7 +161,7 @@ function save() {
 
   for (let docs in saveData.docs) {
     let content = zlib.deflateSync(JSON.stringify(saveData.docs[docs]));
-    saveData.docs[docs] = content;
+    saveData.docs[docs] = content.toString('utf-8');
   }
 
   fs.writeFileSync('./data.json', JSON.stringify(data));
