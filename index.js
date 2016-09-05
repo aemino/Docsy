@@ -125,6 +125,7 @@ client.on("disconnect", () => {
 
 
 client.login(config.token);
+console.log("Logging in...");
 
 function save() {
   fs.writeFileSync('./data.json', JSON.stringify(data));
