@@ -20,7 +20,7 @@ const client = new Discord.Client();
 const docs     = new Docs(data);
 const commands = new Commands(data, docs);
 const server   = new GithubServer(docs);
-const lookup   = new Lookup(docs);
+const lookup   = new Lookup(data, docs);
 
 
 client.on("message", (message) => {
@@ -122,12 +122,7 @@ client.on("message", (message) => {
       return commands.eval(message, evaluate);
     }
   }
-
-  let channel = data.channels[message.channel.id];
-  if (!channel || !channel.repo) return;
-
-  let repo = data.repos[channel.repo];
-  if (!repo || !repo.active) return;
+  
 
   lookup.respond(message, params);
 });
@@ -144,7 +139,7 @@ client.on("disconnect", () => {
 client.login(config.client.token);
 console.log("Logging in...");
 
-function save() {  
+function save() {
   fs.writeFileSync('./data.json', JSON.stringify(data));
 }
 
