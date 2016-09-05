@@ -52,7 +52,8 @@ client.on("message", (message) => {
 
       message.channel.sendMessage(`${config.emojis.cog} Working...`);
 
-      return commands.init(message, owner, repo, branch, path);
+      commands.init(message, owner, repo, branch, path);
+      return save();
     }
 
     if (command === "activate") {
@@ -67,7 +68,8 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Already inactive.`);
       }
 
-      return commands.setActive(true, message, channelID);
+      commands.setActive(true, message, channelID);
+      return save();
     }
 
     if (command === "deactivate") {
@@ -82,7 +84,8 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Already active.`);
       }
 
-      return commands.setActive(false, message, channelID);
+      commands.setActive(false, message, channelID);
+      return save();
     }
 
     if (command === "cease") {
@@ -93,7 +96,8 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Not yet initialized.`);
       }
 
-      return commands.cease(message, channelID);
+      commands.cease(message, channelID);
+      return save();
     }
 
     if (command === "remove") {
