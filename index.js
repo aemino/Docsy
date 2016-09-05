@@ -50,6 +50,8 @@ client.on("message", (message) => {
         return message.channel.sendMessage(`${config.emojis.warn} Invalid arguments.`);
       }
 
+      message.channel.sendMessage(`${config.emojis.cog} Working...`);
+
       return commands.init(message, owner, repo, branch, path);
     }
 
