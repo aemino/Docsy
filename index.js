@@ -100,6 +100,12 @@ client.on("message", (message) => {
 
       return commands.exec(message, cmd);
     }
+
+    if (command === "update") {
+
+      return commands.update(message);
+    }
+
   }
 
 
