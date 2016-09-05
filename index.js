@@ -124,7 +124,7 @@ client.on("disconnect", () => {
 });
 
 
-client.login(config.token);
+client.login(config.client.token);
 console.log("Logging in...");
 
 function save() {
