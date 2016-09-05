@@ -113,7 +113,9 @@ client.on("message", (message) => {
 
     if (command === "eval") {
 
-      return commands.eval(message);
+      const evaluate = args.join(" ");
+
+      return commands.eval(message, evaluate);
     }
   }
 
