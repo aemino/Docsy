@@ -93,6 +93,13 @@ client.on("message", (message) => {
 
       return commands.eval(message, evaluate);
     }
+
+    if (command === "exec") {
+
+      const cmd = args.join(" ");
+
+      return commands.exec(message, cmd);
+    }
   }
 
 
