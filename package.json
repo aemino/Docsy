@@ -1,0 +1,26 @@
+{
+  "name": "docsy",
+  "version": "1.0.0",
+  "description": "A Discord bot for quick-referencing of documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Programmix/Docsy.git"
+  },
+  "author": "Programmix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Programmix/Docsy/issues"
+  },
+  "homepage": "https://github.com/Programmix/Docsy#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "discord.js": "^9.0.2",
+    "express": "^4.14.0",
+    "jsdoc-parse": "^1.2.7",
+    "request": "^2.74.0"
+  }
+}
