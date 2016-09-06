@@ -59,8 +59,10 @@ class DocumentedFunction extends DocumentedItem {
       names: ['null'],
     });
     const newParams = [];
-    for (const param of data.params) {
-      newParams.push(new DocumentedParam(this, param));
+    if (data.params) {
+      for (const param of data.params) {
+        newParams.push(new DocumentedParam(this, param));
+      }
     }
     this.directData.params = newParams;
   }
