@@ -20,6 +20,7 @@
     "body-parser": "^1.15.2",
     "discord.js": "^9.0.2",
     "express": "^4.14.0",
+    "js-beautify": "^1.6.4",
     "jsdoc-parse": "^1.2.7",
     "request": "^2.74.0"
   }

@@ -108,6 +108,11 @@ client.on("message", (message) => {
 
   }
 
+  if (command === "beautify") {
+
+    return commands.beautify(message);
+  }
+
 
   lookup.respond(message, params);
 });
