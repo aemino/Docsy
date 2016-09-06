@@ -119,6 +119,8 @@ client.on("message", (message) => {
 
 client.on("ready", () => {
   console.log("Connected!");
+
+  client.user.setStatus("online", config.client.status);
 });
 
 client.on("disconnect", () => {
