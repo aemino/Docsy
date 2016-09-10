@@ -87,6 +87,18 @@ client.on("message", (message) => {
       return commands.remove(message, channelID);
     }
 
+    if (command === "docslink") {
+
+      const channelID = message.channel.id;
+      const url = args[0];
+
+      if (!data.channels.hasOwnProperty(channelID)) {
+        return message.channel.sendMessage(`${config.emojis.warn} Not yet initialized.`);
+      }
+
+      return commands.docslink(message, channelID, url);
+    }
+
     if (command === "eval") {
 
       const evaluate = args.join(" ");
