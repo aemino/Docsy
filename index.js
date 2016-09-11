@@ -24,6 +24,8 @@ const lookup   = new Lookup(data, docs);
 
 
 client.on("message", (message) => {
+  if (message.author.bot) return; // don't respond to bots
+
   const trigger = client.user.username.toLowerCase() + ", ";
 
   if (!message.content.toLowerCase().startsWith(trigger)) return;
